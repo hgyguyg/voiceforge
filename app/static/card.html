@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>一张声音卡 · 造声</title>
+<meta name="description" content="这张卡里锁着一副世界上不存在的声音。点开听听，还能让 Ta 用你的话念出来。">
+<meta property="og:title" content="有人造了一副声音，让我听听">
+<meta property="og:description" content="一句话造出来的声音，被锁在这张卡里。">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="/static/all.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ff6a3d'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="cardpage">
+
+  <div class="big-card" id="card">
+    <div class="bc-top">
+      <span>Voiceforge</span>
+      <span id="bc-no">No. –</span>
+    </div>
+
+    <div class="bc-glyph" id="bc-glyph">声</div>
+    <div class="bc-name" id="bc-name">正在取卡…</div>
+    <div class="bc-prompt" id="bc-prompt">–</div>
+
+    <canvas class="bc-wave" id="bc-wave" width="640" height="104"></canvas>
+
+    <button class="bc-play" id="bc-play">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <span id="bc-play-text">听这副声音</span>
+    </button>
+
+    <div class="bc-foot">
+      <span id="bc-date">–</span>
+      <span id="bc-plays">0 次播放</span>
+    </div>
+  </div>
+
+  <div class="say-box">
+    <textarea id="say-text" maxlength="300" placeholder="让 Ta 念一句你想听的话…&#10;（比如：生日快乐，虽然我今年忘了你的名字。）"></textarea>
+    <div class="say-row">
+      <button class="btn btn-primary" id="btn-say">让 Ta 念</button>
+      <audio id="say-audio" controls style="display:none"></audio>
+    </div>
+    <div class="say-note">同一副声音，念什么都是 Ta</div>
+  </div>
+
+  <a class="backlink" href="/">← 我也想造一副</a>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="/static/js/card.js"></script>
+</body>
+</html>

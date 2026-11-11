@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 运行时数据：只忽略临时文件，46 张演示卡片随仓库一起走
+# （demo 数据 9.9MB，让 clone 下来就有声音可听）
+shots/
+probe/
+bin/
+*.log
+cf.out
+
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

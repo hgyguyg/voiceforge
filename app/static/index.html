@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>造声 · 用一句话，造一副不存在的声音</title>
+<meta name="description" content="写一句描述，AI 现场造出一副世界上不存在的声音。不满意就重抽，喜欢就锁定成一张声音卡，让别人用 Ta 念任何话。">
+<meta property="og:title" content="造声 · 用一句话，造一副不存在的声音">
+<meta property="og:description" content="写一句描述 → 听 → 不满意重抽 → 锁定成卡。造一副只属于你的声音。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="/static/all.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%23ff6a3d'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="top">
+    <div class="brand">
+      <span class="brand-mark">造声</span>
+      <span class="brand-sub">Voiceforge</span>
+    </div>
+    <nav class="top-links">
+      <a href="#gallery">声音陈列馆</a>
+      <a href="/api/docs" target="_blank" rel="noopener">API</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>用一句话，<br>造一副<em>不存在</em>的声音。</h1>
+    <p>不用录音，不用样本。你只要描述它——多老、多哑、说话时在笑还是在忍。<br>AI 会当场把它造出来念给你听。不喜欢，扔了重造。</p>
+    <div class="hero-stats">
+      <div><b id="stat-count">0</b> 副声音已被造出</div>
+      <div><b>6</b> 秒左右一副</div>
+      <div><b>0</b> 段录音样本</div>
+    </div>
+  </section>
+
+  <!-- ① 描述 -->
+  <div class="panel">
+    <div class="panel-label"><span class="num">1</span> 写下你要的声音</div>
+
+    <textarea id="prompt" maxlength="500"
+      placeholder="例：一个五十多岁的东北男人，嗓门大，说话像在跟人吵架，但每句结尾都带着笑。"></textarea>
+
+    <div class="input-meta">
+      <span>越具体越好：年龄 / 质地 / 语速 / 情绪 / 口音</span>
+      <span id="prompt-count">0 / 500</span>
+    </div>
+
+    <div class="chips">
+      <div class="chips-label">没灵感？点一个</div>
+      <button class="chip" data-p="一个二十岁出头的女孩，声音清亮，语速偏快，像在跟朋友分享刚发现的宝藏。">深夜电台女孩</button>
+      <button class="chip" data-p="一位七十岁的老先生，声音干枯但稳，说话很慢，每个字都像从旧木箱里取出来的。">讲故事的老人</button>
+      <button class="chip" data-p="一个三十岁的男性播音员，音色低沉有磁性，语速平稳，播报天气也像在念情诗。">午夜档主播</button>
+      <button class="chip" data-p="一个七八岁的小男孩，奶声奶气，说话时很兴奋，句子之间要喘气。">邻居家小孩</button>
+      <button class="chip" data-p="一个冷冰冰的女性合成音，没有情绪起伏，每个字都精确等距，像在念讣告。">坏掉的机器人</button>
+      <button class="chip" data-p="一个喝醉了的诗人，声音含糊，忽大忽小，随时会笑起来。">喝醉的诗人</button>
+      <button class="chip" data-p="一位声音沙哑的中年女性，说话很轻，像怕吵醒谁，但每个尾音都不肯落下去。">怕吵醒谁的人</button>
+      <button class="chip" data-p="一个正在跑上楼梯的年轻男性，说话断续，带明显喘息，但很兴奋。">刚跑上楼的人</button>
+      <button class="chip" data-p="一把苍老的女性嗓音，像旧收音机里传出来的，带一点沙沙的电流质感。">旧收音机</button>
+      <button class="chip" data-p="一个温柔的男性，声音低而近，像贴着耳朵说话，气声很多。">耳边的低语</button>
+      <button class="chip" data-p="一个浮夸的电视购物主持，语速极快，每个数字都重读，句尾上扬。">购物频道主持</button>
+      <button class="chip" data-p="一个疲惫的程序员，声音平淡无起伏，说到一半会停下来叹气。">凌晨三点的程序员</button>
+    </div>
+
+    <button class="tuner-toggle" id="tuner-toggle">
+      <span class="arrow">▶</span> 不会写？用滑杆捏
+    </button>
+
+    <div class="tuner" id="tuner">
+      <div class="tuner-row">
+        <label class="tuner-name"><span>年龄</span><span id="v-age">30 岁</span></label>
+        <input type="range" id="s-age" min="5" max="85" value="30">
+      </div>
+      <div class="tuner-row">
+        <label class="tuner-name"><span>沙哑度</span><span id="v-rasp">偏干净</span></label>
+        <input type="range" id="s-rasp" min="0" max="100" value="20">
+      </div>
+      <div class="tuner-row">
+        <label class="tuner-name"><span>语速</span><span id="v-speed">正常</span></label>
+        <input type="range" id="s-speed" min="0" max="100" value="50">
+      </div>
+      <div class="tuner-row">
+        <label class="tuner-name"><span>情绪</span><span id="v-mood">平静</span></label>
+        <input type="range" id="s-mood" min="0" max="100" value="50">
+      </div>
+      <div class="tuner-row">
+        <label class="tuner-name"><span>音量</span><span id="v-vol">中等</span></label>
+        <input type="range" id="s-vol" min="0" max="100" value="50">
+      </div>
+      <div class="tuner-row">
+        <label class="tuner-name"><span>气声</span><span id="v-breath">无</span></label>
+        <input type="range" id="s-breath" min="0" max="100" value="10">
+      </div>
+      <div class="tuner-hint">滑杆动过的项会自动拼进描述，然后点下面那颗「造一副声音」。</div>
+    </div>
+
+    <div class="action-row">
+      <button class="btn btn-primary" id="btn-design">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2-6.3-4.6L5.7 21 8 13.8 2 9.2h7.6z"/></svg>
+        造一副声音
+      </button>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <div class="loading-text" id="loading-text">正在加热熔炉…</div>
+    </div>
+  </div>
+
+  <!-- ② 试听 -->
+  <div class="panel" id="stage">
+    <div class="panel-label"><span class="num">2</span> 听一下，不满意就重造</div>
+
+    <div class="listen">
+      <button class="play-btn" id="play">
+        <svg id="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="wave-wrap">
+        <canvas id="wave" width="600" height="92"></canvas>
+        <div class="listen-meta">
+          <span id="wave-status">点击播放</span>
+          <span id="wave-time">0:00</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="retry-row">
+      <button class="btn btn-ghost" id="btn-again">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A8 8 0 1 0 20 12h-2a6 6 0 1 1-1.76-4.24L13 11h7V4l-2.35 2.35z"/></svg>
+        换一副
+      </button>
+      <button class="btn btn-ghost" id="btn-take" title="锁定这一副，做成声音卡">
+        就它了
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
+      </button>
+      <span class="take-count" id="take-count"></span>
+    </div>
+  </div>
+
+  <!-- ③ 成卡 -->
+  <div class="panel" id="forge">
+    <div class="panel-label"><span class="num">3</span> 给它取个名，铸成卡</div>
+
+    <div class="card-preview">
+      <div class="mini-card" id="mini-card">
+        <div class="mini-top">
+          <span>Voiceforge</span>
+          <span>No. –</span>
+        </div>
+        <div class="mini-glyph" id="mini-glyph">声</div>
+        <div class="mini-name" id="mini-name">无名之声</div>
+        <div class="mini-prompt" id="mini-prompt">—</div>
+        <canvas class="mini-wave" id="mini-wave" width="360" height="52"></canvas>
+        <div class="mini-foot">
+          <span>Design by prompt</span>
+          <span id="mini-tag">∅</span>
+        </div>
+      </div>
+
+      <div class="forge-form">
+        <div>
+          <label class="field-label" for="card-name">声音名</label>
+          <input id="card-name" type="text" maxlength="24" placeholder="例：老周 / 深夜三点 / 雨里的人">
+        </div>
+        <div>
+          <span class="field-label">卡片配色</span>
+          <div class="accents" id="accents">
+            <div class="swatch sel" data-a="ember" style="background:#ff6a3d"></div>
+            <div class="swatch" data-a="moss" style="background:#7fb069"></div>
+            <div class="swatch" data-a="tide" style="background:#5ba9c9"></div>
+            <div class="swatch" data-a="plum" style="background:#b48ec9"></div>
+            <div class="swatch" data-a="sand" style="background:#d9b382"></div>
+            <div class="swatch" data-a="ink" style="background:#6c7a94"></div>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="btn-forge" style="width:100%">铸成这张卡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 完成 -->
+  <div class="panel" id="done">
+    <div class="panel-label"><span class="num">4</span> 卡片铸好了</div>
+    <div class="done-inner">
+      <img id="qr" alt="扫描打开这张声音卡">
+      <div class="done-text">
+        <h3>这张卡有主人了</h3>
+        <a class="done-url" id="done-url" href="#" target="_blank" rel="noopener">–</a>
+        <div class="done-btns">
+          <button class="btn btn-ghost" id="btn-copy">复制链接</button>
+          <a class="btn btn-ghost" id="btn-open" href="#" target="_blank" rel="noopener">打开这张卡</a>
+          <button class="btn btn-ghost" id="btn-restart">再造一个</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 陈列馆 -->
+  <section id="gallery">
+    <div class="gallery-head">
+      <h2>声音陈列馆</h2>
+      <span id="gallery-count">loading</span>
+    </div>
+    <div class="grid" id="grid">
+      <div class="gempty">正在从熔炉里捞声音…</div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>造声 VOICEFORGE · 音色由阿里云百炼 CosyVoice 声音设计生成</span>
+    <span>每一副都是当场现造，不会重复</span>
+  </footer>
+
+</div>
+
+<div id="toast"></div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

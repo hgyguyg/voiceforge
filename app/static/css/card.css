@@ -1,0 +1,117 @@
+/* ---------- 卡片页 ---------- */
+.cardpage {
+  min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 40px 22px;
+}
+.big-card {
+  width: 100%; max-width: 380px;
+  border-radius: 26px; padding: 30px 28px 26px;
+  background: linear-gradient(168deg, rgba(255,255,255,0.1), rgba(255,255,255,0.022));
+  border: 1px solid rgba(255,255,255,0.14);
+  position: relative; overflow: hidden;
+  box-shadow: 0 40px 100px -40px rgba(0,0,0,0.9);
+}
+.big-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(130% 90% at 18% -4%, var(--accent), transparent 60%);
+  opacity: 0.26; pointer-events: none;
+}
+.big-card > * { position: relative; }
+.bc-top {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 0.2em; color: rgba(255,255,255,0.55); text-transform: uppercase;
+}
+.bc-glyph {
+  width: 64px; height: 64px; border-radius: 50%;
+  margin: 34px 0 20px; background: var(--accent);
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-size: 29px; font-weight: 700;
+  color: #140806;
+  box-shadow: 0 0 46px -6px var(--accent);
+}
+.bc-name {
+  font-family: var(--font-display); font-size: 34px; font-weight: 700;
+  line-height: 1.18; word-break: break-word;
+}
+.bc-prompt {
+  margin-top: 14px; font-size: 13.5px; line-height: 1.65;
+  color: rgba(255,255,255,0.65);
+  padding-left: 12px; border-left: 2px solid var(--accent);
+}
+.bc-wave { width: 100%; height: 52px; margin-top: 22px; display: block; }
+.bc-play {
+  width: 100%; margin-top: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18);
+  color: var(--bone); border-radius: var(--r-md);
+  padding: 13px; font-size: 13.5px; font-weight: 600;
+  cursor: pointer; transition: background 0.2s;
+  font-family: var(--font-ui);
+}
+.bc-play:hover { background: rgba(255,255,255,0.17); }
+.bc-play svg { width: 15px; height: 15px; fill: currentColor; }
+.bc-foot {
+  display: flex; justify-content: space-between;
+  margin-top: 18px; padding-top: 15px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  font-family: var(--font-mono); font-size: 8.5px;
+  letter-spacing: 0.14em; color: rgba(255,255,255,0.42);
+  text-transform: uppercase;
+}
+
+/* 让 Ta 念一句 */
+.say-box { width: 100%; max-width: 380px; margin-top: 18px; }
+.say-box textarea {
+  width: 100%; min-height: 74px; resize: vertical;
+  background: rgba(255,255,255,0.04); color: var(--bone);
+  border: 1px solid var(--line); border-radius: var(--r-md);
+  padding: 13px 15px; font-family: var(--font-ui);
+  font-size: 14px; line-height: 1.65;
+}
+.say-box textarea::placeholder { color: #55555f; }
+.say-box textarea:focus { outline: none; border-color: var(--ember); }
+.say-row { display: flex; gap: 9px; margin-top: 10px; align-items: center; }
+.say-row .btn { flex: 1; padding: 12px; font-size: 13.5px; }
+.say-note {
+  margin-top: 10px; font-family: var(--font-mono); font-size: 10px;
+  color: #5d5d68; letter-spacing: 0.06em; text-align: center;
+}
+.backlink {
+  margin-top: 26px; font-family: var(--font-mono); font-size: 11px;
+  color: var(--bone-dim); letter-spacing: 0.1em; text-decoration: none;
+  transition: color 0.2s;
+}
+.backlink:hover { color: var(--ember); }
+
+/* 页脚 */
+.foot {
+  margin-top: 60px; padding-top: 22px;
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.1em; color: #4d4d57;
+}
+.foot a { color: #5d5d68; text-decoration: none; }
+.foot a:hover { color: var(--ember); }
+
+/* 响应式 */
+@media (max-width: 660px) {
+  .wrap { padding: 0 16px 70px; }
+  .hero { padding: 44px 0 26px; }
+  .panel { padding: 20px 17px; border-radius: 16px; }
+  .tuner { grid-template-columns: 1fr; }
+  .card-preview { flex-direction: column; }
+  .mini-card { flex: none; width: 100%; }
+  .done-inner { flex-direction: column; text-align: center; }
+  .done-btns { justify-content: center; }
+  .gallery-head { margin-top: 40px; }
+  .grid { grid-template-columns: 1fr 1fr; }
+  .hero-stats { gap: 20px; }
+  .action-row { flex-wrap: wrap; }
+  .action-row .btn-primary { flex: 1 0 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
