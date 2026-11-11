@@ -5,7 +5,7 @@
 
 不需要录音，不需要样本。0 段音频输入。
 
-**在线试试：** https://just-simulations-elderly-mild.trycloudflare.com
+**在线试试：** https://mice-apache-kinda-stainless.trycloudflare.com
 **仓库地址：** https://github.com/hgyguyg/voiceforge
 （Cloudflare 免费隧道，进程一停就换域名。打不开就本地跑，见下面「30 秒上手」。）
 
@@ -51,16 +51,16 @@ ngrok http 8000
 
 Windows 上打包好的双击启动脚本见 `start.bat`。
 
-### 声音陈列馆里那 46 副是什么
+### 声音陈列馆里那 47 副是什么
 
-首页底部的「声音陈列馆」里现有 **46 张真实生成的声音卡**，全部来自 `tools/seed_gallery.py`：
+首页底部的「声音陈列馆」里现在有 **47 张真实生成的声音卡**：其中 46 张来自 `tools/seed_gallery.py` 批量生成，第 47 张「砂纸」是写教程时现场造的。
 
 ```bash
 python tools/seed_gallery.py        # 46 条人工写的描述 → 并发造声 → 直接成卡
 ```
 
 它跑的是同一套 `design_voice()` + `create_card()`，不是假数据。所以第一次打开首页时，你不会看到一座空馆子。
-（脚本放在 `tools/` 里，因为它是可复现的证据：那 46 副声音不是贴的循环音频。）
+（脚本放在 `tools/` 里，因为它是可复现的证据：这些声音不是贴的循环音频。）
 
 ---
 

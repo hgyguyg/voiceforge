@@ -119,7 +119,7 @@ def read_card(card_id: str) -> dict[str, Any]:
 
 @app.get("/api/gallery")
 def gallery() -> dict[str, Any]:
-    cards = store.list_cards(24)
+    cards = store.list_cards(60)
     for c in cards:
         c["preview_url"] = f"/audio/{c['preview_file']}"
     return {"cards": cards, "total": store.card_count()}
