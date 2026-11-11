@@ -9,7 +9,7 @@
 **仓库地址：** https://github.com/hgyguyg/voiceforge
 （Cloudflare 免费隧道，进程一停就换域名。打不开就本地跑，见下面「30 秒上手」。）
 
-![首页](docs/img/01-home.png)
+![首页](docs/img/01-home.jpg)
 
 ---
 
@@ -102,7 +102,7 @@ python tools/seed_gallery.py        # 46 条人工写的描述 → 并发造声 
 
 打开 `/c/<id>`，任何人都能让这副声音念**他自己**输入的文字（≤300 字）。这是它区别于「音色试听 demo」的地方——声音有了归属，也有了社交属性。
 
-![卡片页](docs/img/08-card.png)
+![卡片页](docs/img/08-card.jpg)
 
 ---
 
