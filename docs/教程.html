@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<title>我用一句话，造出了 47 副不存在的声音</title>
+<style>
+  @page { margin: 18mm 16mm; }
+  body { font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+         max-width: 760px; margin: 0 auto; padding: 32px 8px 60px;
+         color: #222; line-height: 1.85; font-size: 15.5px; }
+  h1 { font-size: 26px; line-height: 1.45; margin: 0 0 22px; letter-spacing: .3px; }
+  h2 { font-size: 20px; margin: 38px 0 14px; padding-top: 10px; border-top: 1px solid #eee; }
+  h3 { font-size: 17px; margin: 26px 0 10px; }
+  p { margin: 12px 0; }
+  blockquote { margin: 16px 0; padding: 10px 16px; background: #f7f5f2;
+               border-left: 3px solid #ff6a3d; color: #444; }
+  blockquote p { margin: 4px 0; }
+  img { max-width: 100%; border-radius: 10px; margin: 14px 0;
+        box-shadow: 0 2px 14px rgba(0,0,0,.12); display: block; }
+  code { background: #f2f2f2; padding: 1px 5px; border-radius: 4px;
+         font-size: 13px; font-family: Consolas, monospace; }
+  pre { background: #1c1c1f; color: #eee; padding: 14px 16px; border-radius: 8px;
+        overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
+  th, td { border: 1px solid #e2e2e2; padding: 8px 10px; text-align: left; }
+  th { background: #faf8f6; }
+  hr { border: none; border-top: 1px solid #eee; margin: 30px 0; }
+  em { color: #666; }
+</style></head><body>
+<h1>我用一句话，造出了 47 副不存在的声音——然后给它们做了身份证</h1>
+<blockquote>
+<p>全程没录一秒音。你说的每一个字，AI 都能给你一张嗓子。</p>
+</blockquote>
+<hr />
+<h2>先说结论</h2>
+<p>我做了个东西，叫<strong>造声</strong>。</p>
+<p>你在框里写一句话——</p>
+<blockquote>
+<p>一个五十多岁的东北男人，嗓门大，说话像在跟人吵架，但每句结尾都带着笑。</p>
+</blockquote>
+<p>八秒钟后，这副嗓门就活了。它会开口说：「你好，我是刚刚被造出来的声音。你听，这就是我。」</p>
+<p>跟你不满意？点「换一副」，它再给你一副<strong>完全不同</strong>的嗓子。同一句话，造三次，就是三个人。</p>
+<p>满意了？起个名、挑个颜色，锁成一张<strong>声音卡</strong>。卡上有编号、有波形、有二维码。别人扫开这张卡，能让<strong>这副声音</strong>念<strong>他自己</strong>想听的话。</p>
+<p><img alt="首页" src="img/01-home.jpg" /></p>
+<p>我把这张卡发给朋友，他输了一句「下辈子别他妈当程序员了」，然后用一个陌生老头的声音念出来。他说他起了一身鸡皮疙瘩。</p>
+<hr />
+<h2>为什么我想做这个</h2>
+<p>你有没有发现，所有「让 AI 说话」的产品，都卡在同一件事上：<strong>声音从哪儿来</strong>。</p>
+<ul>
+<li>真人录音？得找人、得录、得授权。</li>
+<li>声音克隆？你得先有那个人的 5 秒录音。</li>
+<li>那我想要一个<strong>根本不存在</strong>的人呢？一个抽了四十年烟、七十岁、说话像在跟人赌气的老太太——上哪儿录去？</li>
+</ul>
+<p>阿里云百炼有个能力叫<strong>声音设计</strong>（CosyVoice voice design），它把这件事反过来了：</p>
+<p><strong>不给样本，给一句描述。</strong> 它直接合成一副符合描述、此前世界上不存在的嗓子，还返回一个能长期复用的 <code>voice_id</code>。</p>
+<p>接口是接口，不是产品。我把它做成了一个能玩、能传的东西。</p>
+<hr />
+<h2>四步，从一句话到一张卡</h2>
+<h3>第一步：写描述（或者拉滑杆）</h3>
+<p>描述越<strong>物理</strong>越好。别写「好听的声音」，写：</p>
+<blockquote>
+<p>年龄多大 / 声带粗不粗 / 语速快不快 / 说话时在笑还是在忍 / 有没有气声</p>
+</blockquote>
+<p>首页给了 12 个灵感标签，点一下就填进去：深夜电台女孩、讲故事的老人、坏掉的机器人、喝醉的诗人、旧收音机、凌晨三点的程序员……</p>
+<p><img alt="滑杆" src="img/02-tuner.jpg" /></p>
+<p>不想写字就拉滑杆：年龄、沙哑度、语速、情绪、音量、气声。<strong>只有你动过的那几根</strong>会被翻译成文字拼进描述——没动过的不算数，不然每副声音都会带上「三十岁、嗓音干净」这种默认值。</p>
+<h3>第二步：听，然后一直重抽</h3>
+<p>点「造一副声音」，等 6–9 秒。</p>
+<p>这里有个我觉得最有意思的地方：<strong>同一句描述，每次造出来都不一样。</strong></p>
+<p>我特意测了三次：</p>
+<table>
+<thead>
+<tr>
+<th>第几次</th>
+<th>voice_id 尾段</th>
+<th>音频 md5</th>
+<th>耗时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>tri0-596efce4</code></td>
+<td><code>b8452c18…</code></td>
+<td>8.9s</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>tri1-c73663d7</code></td>
+<td><code>b73e7685…</code></td>
+<td>8.0s</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>tri2-df547361</code></td>
+<td><code>ea7c7c06…</code></td>
+<td>8.1s</td>
+</tr>
+</tbody>
+</table>
+<p>三个完全不同的 <code>voice_id</code>，三段 md5 不同的音频。</p>
+<p><img alt="造好了" src="img/03-result.jpg" /></p>
+<p>这意味着什么？意味着它不是「从一百副预设嗓子里挑一副」，而是<strong>每次都真的现造一副新的</strong>。所以你抽卡的欲望会停不下来——就像开盲盒，但盲盒里装的是声带。</p>
+<p>我连着造了 47 副，把满意的都留下来了——你现在点开首页底部的「声音陈列馆」就能一个个听。其中我最喜欢的是一个「像在雨里等了两小时、但还想再等一会儿」的声音。</p>
+<p><img alt="陈列馆" src="img/09-gallery.jpg" /></p>
+<h3>第三步：锁成卡，让它属于你</h3>
+<p>起个名（老周 / 深夜三点 / 雨里的人）、选个颜色、铸成卡。</p>
+<p>卡片长这样：</p>
+<p><img alt="成卡" src="img/07-done.jpg" /></p>
+<p>编号是随机生成的，波形是<strong>真波形</strong>——前端把音频拉下来，<code>AudioContext.decodeAudioData</code> 解出 PCM，按块取绝对峰值，画 96 根柱子。不是随机数，也不是贴图。</p>
+<h3>第四步：别人能拿它说话</h3>
+<p>这是我觉得这个项目跟「音色试听 demo」最不一样的地方。</p>
+<p>点开 <code>/c/&lt;卡片id&gt;</code>，任何人都能输入一句话，让<strong>这副声音</strong>念出来。上限 300 字。</p>
+<p><img alt="卡片页" src="img/08-card.jpg" /></p>
+<p>声音有了归属，也就有了社交属性。你造的不是一个「功能」，是一个「角色」。</p>
+<hr />
+<h2>技术上是怎么搭的</h2>
+<p>说出来有点不好意思：<strong>没有前端框架，没有构建工具，没有 node_modules。</strong></p>
+<pre><code>FastAPI + 原生 HTML/CSS/JS + SQLite
+</code></pre>
+<p>三个 Python 文件（路由 / 百炼客户端 / 存储），一套静态页面。<code>pip install -r requirements.txt &amp;&amp; python run.py</code> 就能跑。</p>
+<p>为什么这么选？因为我想在三天里把<strong>产品</strong>做完，而不是把<strong>脚手架</strong>搭完。</p>
+<p>几个我自己比较满意的取舍：</p>
+<ul>
+<li><strong>草稿和卡片分开存</strong>。<code>/api/design</code> 只落草稿，点「就它了」才把音频复制一份成正式卡片。草稿可以随便清理，卡片永远不会失效。</li>
+<li><strong>波形是真的</strong>。上面说了。</li>
+<li><strong>滑杆只认「动过的」</strong>。用一个 <code>Set</code> 记录 touch 过的滑杆，拼描述时只拼这些。这个小细节让默认值不再污染结果。</li>
+</ul>
+<hr />
+<h2>踩的坑（这部分是真花钱买的）</h2>
+<h3>坑 1：<code>url error, please check url！</code></h3>
+<p>我一开始把语音合成打到了 <code>/api/v1/services/aigc/multimodal-generation/generation</code>。</p>
+<p>返回 400，报 <code>InvalidParameter: url error, please check url！</code>。</p>
+<p>我以为是网络问题，换了三个域名，加了三层重试，怀疑了代理、怀疑了防火墙、怀疑了人生。</p>
+<p>最后在阿里云的错误码文档里看到这一条的官方解释：</p>
+<blockquote>
+<p><strong>原因一：模型名称与 API 端点不匹配。</strong></p>
+</blockquote>
+<p>语音合成的端点是 <code>/api/v1/services/audio/tts/SpeechSynthesizer</code>。那个 multimodal 端点是给通义万相/千问 VL 这类多模态模型用的。</p>
+<p>一行 URL，卡了我一晚上。</p>
+<h3>坑 2：文档里的新域名，我这儿解析不了</h3>
+<p>阿里云文档写的是 <code>https://{WorkspaceId}.cn-beijing.maas.aliyuncs.com/...</code>。</p>
+<p>我这儿 <code>getaddrinfo failed</code>。</p>
+<p>换成旧域名 <code>dashscope.aliyuncs.com</code>——通了，137ms。</p>
+<h3>坑 3：Windows 当前进程读不到刚设的环境变量</h3>
+<p>Key 是刚在「系统属性 → 环境变量」里设的，<code>os.environ</code> 里没有。</p>
+<p>不是没设成功，是<strong>当前这个进程的 env 快照是旧的</strong>。程序里加了个兜底：进程里读不到，就去注册表读一次 <code>[Environment]::GetEnvironmentVariable('DASHSCOPE_API_KEY','User')</code>。</p>
+<h3>坑 4：波形画不出来，因为面板还没显示</h3>
+<p><code>cv.clientWidth</code> 在元素 <code>display: none</code> 的时候是 <code>0</code>。于是 <code>cv.width = 0</code>，之后就算显示了，画布还是 0 像素宽，波形永远空白。</p>
+<p>修法两行：<code>if (!W || !H) return;</code>，外加面板显示后主动重绘一次。</p>
+<hr />
+<h2>一些我没做到的事（说清楚）</h2>
+<ul>
+<li><strong>我听不到音频。</strong> 这是实话——我没有耳朵。我能从接口层面确认「三次三副嗓子」「同一个 id 稳定复现」，但<strong>造出来像不像那句描述，得你自己听</strong>。这是这个项目最大的验证盲区。</li>
+<li><strong>做不到秒回。</strong> 造音色要 6–9 秒，念一句话要 1.5 秒。不是流式。</li>
+<li><strong>公网链接是临时的。</strong> 我用 Cloudflare 免费隧道挂的，进程一停域名就换。要长期在线得自己配固定域名。</li>
+<li><strong>没有鉴权、没有限流。</strong> 每次造声音都真实花钱，别直接挂公网不管。</li>
+</ul>
+<hr />
+<h2>最后</h2>
+<p>我一直觉得，AI 生成最迷人的地方不是「替你干活」，是<strong>「造出原本不存在的东西」</strong>。</p>
+<p>文字可以凭空造，图片可以凭空造。声音一直不太行——它总得有个「原型」。</p>
+<p>这次终于可以了。你可以造一副<strong>只存在于你描述里</strong>的嗓子，然后让它说任何话。</p>
+<p>去造一副吧。造个你外婆的声音，造个你想象中二十年后的自己，造个你家猫如果会说话会是什么动静。</p>
+<p>反正，它不用真的存在。</p>
+<hr />
+<p><em>代码与启动方式：github.com/hgyguyg/voiceforge</em>
+<em>在线版：mice-apache-kinda-stainless.trycloudflare.com（临时隧道，随时可能失效）</em>
+<em>造一副大概花 6–9 秒，按百炼的调用量计费</em></p>
+</body></html>
