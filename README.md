@@ -6,8 +6,12 @@
 不需要录音，不需要样本。0 段音频输入。
 
 **在线试试：** https://mice-apache-kinda-stainless.trycloudflare.com
-**仓库地址：** https://github.com/hgyguyg/voiceforge
 （Cloudflare 免费隧道，进程一停就换域名。打不开就本地跑，见下面「30 秒上手」。）
+
+**仓库地址：** https://github.com/hgyguyg/voiceforge
+
+📖 **图文教程**：[docs/教程.md](docs/教程.md)（约 1860 字：怎么做的、踩了什么坑）
+📝 **创作说明**：[docs/创作说明.md](docs/创作说明.md)（选题理由、用了哪些 AI 工具、打算发哪儿）
 
 ![首页](docs/img/01-home.jpg)
 
@@ -143,7 +147,7 @@ voiceforge/
 | `GET` | `/api/cards/{id}` | 卡片详情 |
 | `POST` | `/api/cards/{id}/say` | `{text}` → `{audio_url}`，用这副声音念任意文字 |
 | `POST` | `/api/cards/{id}/play` | 播放计数 +1 |
-| `GET` | `/api/gallery` | 声音陈列馆（最近 24 张） |
+| `GET` | `/api/gallery` | 声音陈列馆（最近 60 张） |
 | `GET` | `/api/qr?d=<url>` | 把链接画成二维码 PNG |
 | `GET` | `/api/health` | `{ok, cards, model}` |
 
