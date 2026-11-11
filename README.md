@@ -6,6 +6,7 @@
 不需要录音，不需要样本。0 段音频输入。
 
 **在线试试：** https://just-simulations-elderly-mild.trycloudflare.com
+**仓库地址：** https://github.com/hgyguyg/voiceforge
 （Cloudflare 免费隧道，进程一停就换域名。打不开就本地跑，见下面「30 秒上手」。）
 
 ![首页](docs/img/01-home.png)
@@ -29,7 +30,7 @@
 ## 30 秒上手
 
 ```bash
-git clone <this-repo> voiceforge && cd voiceforge
+git clone https://github.com/hgyguyg/voiceforge.git && cd voiceforge
 pip install -r requirements.txt
 export DASHSCOPE_API_KEY=sk-xxxxxxxx      # Windows: set DASHSCOPE_API_KEY=...
 python run.py
