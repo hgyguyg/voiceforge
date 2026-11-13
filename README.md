@@ -15,9 +15,6 @@ pinned: false
 
 不需要录音，不需要样本。0 段音频输入。
 
-**在线试试：** https://mice-apache-kinda-stainless.trycloudflare.com
-（Cloudflare 免费隧道，进程一停就换域名。打不开就本地跑，见下面「30 秒上手」。）
-
 **仓库地址：** https://github.com/hgyguyg/voiceforge
 
 📖 **图文教程**：[docs/教程.md](docs/教程.md)（约 1860 字：怎么做的、踩了什么坑）
