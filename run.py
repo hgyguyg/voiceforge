@@ -8,6 +8,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent / "app"))
 if __name__ == "__main__":
     import uvicorn
 
-    port = int(os.environ.get("PORT", "8000"))
+    port = int(os.environ.get("PORT", "7860"))
     print(f"\n  造声 VOICEFORGE  ·  http://127.0.0.1:{port}\n")
     uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False)

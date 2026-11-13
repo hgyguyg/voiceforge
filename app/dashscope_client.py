@@ -18,7 +18,10 @@ TARGET_MODEL = "cosyvoice-v3.5-plus"
 
 
 def _read_key_from_registry() -> str:
-    """从 Windows 用户环境变量读 Key：当前进程拿不到新设的变量，但注册表里已经有。"""
+    """从 Windows 用户环境变量读 Key：当前进程拿不到新设的变量，但注册表里已经有。
+    非 Windows（如 Linux 容器）直接返回空，避免每次都起一个失败的 subprocess。"""
+    if os.name != "nt":
+        return ""
     try:
         out = subprocess.run(
             [

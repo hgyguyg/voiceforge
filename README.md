@@ -1,3 +1,13 @@
+---
+title: 造声 Voiceforge
+emoji: 🔊
+colorFrom: orange
+colorTo: amber
+sdk: docker
+app_port: 7860
+pinned: false
+---
+
 # 造声 Voiceforge — 用一句话，造一副不存在的声音
 
 > 写一句描述 → AI 当场造出一个音色念给你听 → 不满意就重抽 → 喜欢就锁成一张**声音卡**。

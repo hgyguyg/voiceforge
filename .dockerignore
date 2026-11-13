@@ -1,0 +1,14 @@
+.git
+.gitignore
+__pycache__
+*.pyc
+*.pyo
+.DS_Store
+probe/
+docs/
+bin/
+cf.log
+cf.out
+*.bat
+.venv
+venv
